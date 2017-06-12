@@ -1,0 +1,14 @@
+FROM mhart/alpine-node:6.10.3
+
+RUN mkdir -p /app
+WORKDIR /app
+
+COPY ./math-random/package.json  ./
+
+RUN npm install 
+
+COPY ./math-random/ .
+
+EXPOSE 8082
+
+CMD ["node", "index.js"]

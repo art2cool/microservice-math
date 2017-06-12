@@ -1,0 +1,32 @@
+version: "2"
+services:
+   proxy-service:
+      build:
+         dockerfile: ./proxy/Dockerfile
+         context: .
+      ports:
+        - "3000:3000"
+   math-router:
+      build:
+         dockerfile: ./math-router/Dockerfile
+         context: .
+      ports:
+        - "8080:8080"
+   math-random:
+      build:
+         dockerfile: ./math-random/Dockerfile
+         context: .
+      ports:
+        - "8082:8082"
+   math-sum:
+      build:
+         dockerfile: ./math-sum/Dockerfile
+         context: .
+      ports:
+        - "8081:8081"
+   service-jwt:
+      build:
+         dockerfile: ./service-jwt/Dockerfile
+         context: .
+      ports:
+        - "8989:8989"
