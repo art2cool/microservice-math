@@ -5,9 +5,9 @@ const bodyParser = require('body-parser');
 const querystring = require('querystring');
 
 const opt = {
-	sum: "http://localhost:8081",
-	random: "http://localhost:8082",
-	jwt: "http://localhost:8989"
+	sum: "http://math-sum:8081",
+	random: "http://math-random:8082",
+	jwt: "http://service-jwt:8989"
 }
 
 app.use(bodyParser.urlencoded({ extended: false }));

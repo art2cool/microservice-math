@@ -5,9 +5,9 @@ const request = require('request');
 const app = express();
 
 const opt = {
-	sum: "http://localhost:8081",
-	random: "http://localhost:8082",
-	jwt: "http://localhost:8989"
+	sum: "http://math-sum:8081",
+	random: "http://math-random:8082",
+	jwt: "http://service-jwt:8989"
 }
 
 app.get('/', checkToken, (req, res) => {
