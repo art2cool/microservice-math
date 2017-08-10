@@ -3,11 +3,11 @@ FROM mhart/alpine-node:6.10.3
 RUN mkdir -p /app
 WORKDIR /app
 
-COPY ./math-sum/package.json  ./
+COPY ./package.json  ./
 
-RUN npm install 
+RUN npm install
 
-COPY ./math-sum/ .
+COPY . .
 
 EXPOSE 8081
 

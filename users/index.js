@@ -2,22 +2,26 @@ const express = require('express');
 const querystring = require('querystring');
 const request = require('request');
 const app = express();
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://mongo/ms_test', function(err) {
+    if (err) {
+        console.log(err);
+    } else {
+        console.log('Database connected');
+    }
+});
 
 const opt = {
-  sum: "http://math-sum:8081",
-  random: "http://math-random:8082",
   jwt: "http://service-jwt:8989"
 }
 
-app.get('/', checkToken, (req, res) => {
-  const { left, right, operation } = req.query
-  const num = Math.floor(Math.random() * (parseInt(right, 10) - parseInt(left, 10)) + parseInt(left, 10))
-  res.send({ answer: num });
+app.get('/',checkToken, (req, res) => {
+  res.send({ msg: 'users are here' });
 });
 
-
-app.listen(8082, () => {
-  console.log('Math random on port 8082!');
+app.listen(8001, () => {
+  console.log('Users listen on port 8001!');
 });
 
 //middleware

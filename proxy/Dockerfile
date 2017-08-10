@@ -3,11 +3,11 @@ FROM mhart/alpine-node:6.10.3
 RUN mkdir -p /app
 WORKDIR /app
 
-COPY ./proxy/package.json  ./
+COPY ./package.json  ./
 
-RUN npm install 
+RUN npm install
 
-COPY ./proxy .
+COPY . .
 
 EXPOSE 3000
 

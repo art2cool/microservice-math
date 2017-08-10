@@ -22,14 +22,19 @@ app.listen(8081, () => {
 
 //middleware
 function checkToken(req, res, next) {
-	const token = req.query.token;
-	const query = querystring.stringify({ token })
+  const token = req.headers.auth;
+  const options = {
+    url: `${opt.jwt}/verify`,
+    headers: {
+      auth: `${token}`
+    }
+  };
 
-	request(`${opt.jwt}/verify?${query}`, (error, response, body) => {
-		if (response.statusCode === 401) {
-			res.status(401).send({msg: 'Forbiten'})
-		return;
-		}
-		next();		
-	});
+  request(options, (error, response, body) => {
+    if (response.statusCode === 401) {
+      res.status(401).send({ msg: 'Forbiten' })
+      return;
+    }
+    next();
+  });
 }

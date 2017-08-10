@@ -2,31 +2,51 @@ version: "2"
 services:
    proxy-service:
       build:
-         dockerfile: ./proxy/Dockerfile
-         context: .
+         dockerfile: Dockerfile
+         context: ./proxy/
       ports:
         - "3000:3000"
+   api-gateway:
+      build:
+         dockerfile: Dockerfile
+         context: ./api-gateway/
+      ports:
+        - "8000:8000"
    math-router:
       build:
-         dockerfile: ./math-router/Dockerfile
-         context: .
+         dockerfile: Dockerfile
+         context: ./math-router/
       ports:
         - "8080:8080"
    math-random:
       build:
-         dockerfile: ./math-random/Dockerfile
-         context: .
+         dockerfile: Dockerfile
+         context: ./math-random/
       ports:
         - "8082:8082"
    math-sum:
       build:
-         dockerfile: ./math-sum/Dockerfile
-         context: .
+         dockerfile: Dockerfile
+         context: ./math-sum/
       ports:
         - "8081:8081"
    service-jwt:
       build:
-         dockerfile: ./service-jwt/Dockerfile
-         context: .
+         dockerfile: Dockerfile
+         context: ./service-jwt/
       ports:
         - "8989:8989"
+   users-api:
+      build:
+         dockerfile: Dockerfile
+         context: ./users/
+      ports:
+        - "8001:8001"
+      links:
+        - mongo
+   mongo:
+      image: mongo
+      volumes:
+        - /data/mongodb/db:/data/db
+      ports:
+        - "27018:27018"
