@@ -1,8 +1,8 @@
 const express = require('express');
-const querystring = require('querystring');
 const request = require('request');
 const app = express();
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 mongoose.connect('mongodb://mongo/ms_test', function(err) {
     if (err) {
@@ -16,9 +16,10 @@ const opt = {
   jwt: "http://service-jwt:8989"
 }
 
-app.get('/',checkToken, (req, res) => {
-  res.send({ msg: 'users are here' });
-});
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use('/', checkToken, require('./router/users'));
 
 app.listen(8001, () => {
   console.log('Users listen on port 8001!');
