@@ -36,6 +36,12 @@ services:
          context: ./service-jwt/
       ports:
         - "8989:8989"
+   auth-api:
+      build:
+         dockerfile: Dockerfile
+         context: ./auth/
+      ports:
+        - "8228:8228"
    users-api:
       build:
          dockerfile: Dockerfile

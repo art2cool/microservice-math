@@ -4,22 +4,12 @@ const httpProxy = require('express-http-proxy');
 const request = require('request');
 
 const opt = {
-  sum: "http://math-sum:8081",
-  random: "http://math-random:8082",
   jwt: "http://service-jwt:8989",
-  users: "http://users-api:8989",
 }
 
-const proxyUsers = httpProxy('http://users-api:8001');
-const proxyMath = httpProxy('http://math-router:8080');
-
-app.use('/math', getToken, (req, res, next) => {
-  proxyMath(req, res, next)
-});
-
-app.use('/users', getToken, (req, res, next) => {
-  proxyUsers(req, res, next)
-});
+app.use('/math', getToken, httpProxy('http://math-router:8080'));
+app.use('/users', getToken, httpProxy('http://users-api:8001'));
+app.use('/auth', getToken, httpProxy('http://auth-api:8228'));
 
 app.listen(8000, () => {
   console.log('Api gateway listen on port 8000')

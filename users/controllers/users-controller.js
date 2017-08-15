@@ -9,9 +9,9 @@ function getUsers(req, res, next) {
         err: null,
         data: users
       })
-        .catch((err) => {
-          res.send({ err, data: null })
-        })
+    })
+    .catch((err) => {
+      res.send({ err, data: null })
     })
 }
 
@@ -25,19 +25,19 @@ function getUserById(req, res, next) {
         err: null,
         data: user
       })
-        .catch((err) => {
-          res.send({ err, data: null })
-        })
+    })
+    .catch((err) => {
+      res.send({ err, data: null })
     })
 }
 
 function createUser(req, res, next) {
   const body = req.body;
   const newUser = new User({
-    username: body.username,
     email: body.email,
     password: body.password,
-    role: body.role
+    emailToken: body.emailToken,
+    expiredToken: body.expiredToken
   })
   newUser
     .save()
@@ -46,11 +46,11 @@ function createUser(req, res, next) {
         err: null,
         data: user
       })
-        .catch((err) => {
-          res.send({ err, data: null })
-        })
     })
-}
+    .catch((err) => {
+      res.send({ err, data: null })
+    })
+};
 
 function removeUser(req, res, next) {
   const id = req.params.id;
@@ -61,9 +61,9 @@ function removeUser(req, res, next) {
         err: null,
         data: user
       })
-        .catch((err) => {
-          res.send({ err, data: null })
-        })
+    })
+    .catch((err) => {
+      res.send({ err, data: null })
     })
 }
 function updateUser(req, res, next) {
@@ -81,9 +81,9 @@ function updateUser(req, res, next) {
         err: null,
         data: user
       })
-        .catch((err) => {
-          res.send({ err, data: null })
-        })
+    })
+    .catch((err) => {
+      res.send({ err, data: null })
     })
 }
 
